@@ -1,10 +1,7 @@
-from classes.area_finder.ABC_area_finder import AreaFinder
-
-
 import requests
 
 
-class HHAreaFinder(AreaFinder):
+class HHAreaFinder:
 
     def __init__(self, desired_location):
         self.place = {}
