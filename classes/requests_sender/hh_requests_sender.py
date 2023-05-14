@@ -1,4 +1,4 @@
-from classes.requests_sender import RequestsSender
+from classes.requests_sender.requests_sender import RequestsSender
 
 
 import requests

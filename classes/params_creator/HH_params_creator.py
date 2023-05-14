@@ -1,7 +1,7 @@
-from classes.area_finder import AreaFinder
+from classes.params_creator.ABC_params_creator import ABCParamsCreator
 
 
-class ParamsCreator:
+class HHParamsCreator(ABCParamsCreator):
     def __init__(self):
         self.headers = {}
 
