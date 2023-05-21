@@ -1,8 +1,13 @@
+from dotenv import load_dotenv
 import os
 from classes.requests_sender.requests_sender import RequestsSender
 
-
 import requests
+
+
+load_dotenv()
+
+#  тут комментарии излишни
 
 
 class SuperJobRequestsSender(RequestsSender):
@@ -13,5 +18,5 @@ class SuperJobRequestsSender(RequestsSender):
 
     def find_vacancies(self):
         response = requests.get(self.url, headers=self.headers, params=self.params)
-        return response.text
-
+        response.encoding = 'utf-8'
+        return response.json()

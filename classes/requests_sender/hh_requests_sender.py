@@ -3,6 +3,8 @@ from classes.requests_sender.requests_sender import RequestsSender
 
 import requests
 
+#  тут комментарии излишни
+
 
 class HunterRequestsSender(RequestsSender):
     def __init__(self, params):
@@ -11,4 +13,4 @@ class HunterRequestsSender(RequestsSender):
 
     def find_vacancies(self):
         request = requests.get(self.url, params=self.params)
-        return request.text
+        return request.json()
