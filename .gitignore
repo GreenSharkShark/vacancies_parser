@@ -155,7 +155,7 @@ cython_debug/
 
 /json_responses/hh_response_logs.json
 /json_responses/sj_response_logs.json
-/json_responses/favorite.json.json
+/json_responses/favorite.json
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
