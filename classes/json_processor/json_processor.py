@@ -117,9 +117,10 @@ class JSONProcessor:
         objects_list = []
         for i in objects:
             name = i['_Vacancy__name']
-            salary = i['_Vacancy__salary']
+            salary_from = i['_salary_from']
+            salary_to = i['_salary_to']
             url = i['_Vacancy__url']
             description = i['_Vacancy__description']
             place = i['_Vacancy__place']
-            objects_list.append(Vacancy(name, salary, url, description, place))
+            objects_list.append(Vacancy(name, url, description, place, salary_from, salary_to))
         return objects_list

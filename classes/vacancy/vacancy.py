@@ -1,8 +1,8 @@
 class Vacancy:
     def __init__(self, name, url, description, place, salary_from=None, salary_to=None):
         self.__name = name
-        self.__salary_from = salary_from
-        self.__salary_to = salary_to
+        self._salary_from = int(salary_from) if salary_from else None
+        self._salary_to = int(salary_to) if salary_to else None
         self.__url = url
         self.__description = description
         self.__place = place
@@ -24,12 +24,12 @@ class Vacancy:
 
             try:
                 salary_from = i['salary']['from']
-            except KeyError:
+            except (KeyError, TypeError):
                 salary_from = None
 
             try:
                 salary_to = i['salary']['from']
-            except KeyError:
+            except (KeyError, TypeError):
                 salary_to = None
 
             try:
@@ -83,10 +83,10 @@ class Vacancy:
         return objects_list
 
     def __str__(self):
-        if self.__salary_to:
-            salary = f'ЗП от {self.__salary_from} до {self.__salary_to}.'
+        if self._salary_to:
+            salary = f'ЗП от {self._salary_from} до {self._salary_to}.'
         else:
-            salary = f'ЗП от {self.__salary_from}.'
+            salary = f'ЗП от {self._salary_from}.'
         return f'{self.__name}\n' \
                f'{self.__place}\n' \
                f'{self.__description}\n' \
