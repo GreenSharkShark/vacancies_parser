@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "coursepaper4"
+version = "0.1.0"
+description = ""
+authors = ["Zhorik Zeniuk <ZhorikZeniuk@gmail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.11.2"
+requests = "^2.30.0"
+coverage = "^7.2.5"
+python-dotenv = "^1.0.0"
+pytest = "^7.3.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
