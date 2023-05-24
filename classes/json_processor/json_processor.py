@@ -4,6 +4,7 @@ import datetime
 from classes.vacancy.vacancy import Vacancy
 
 
+# noinspection PyUnboundLocalVariable
 class JSONProcessor:
     """
     Класс для чтения и записи json файлов.
@@ -30,7 +31,7 @@ class JSONProcessor:
         :return:
         """
         file_path = self.__return_filepath(filename)
-        with open(file_path) as file:
+        with open(file_path, encoding="utf-8") as file:
             content = json.load(file)
         return content if content else False
 
@@ -42,7 +43,7 @@ class JSONProcessor:
         :param content:
         :return:
         """
-        with open(file_path, 'w') as file:
+        with open(file_path, 'w', encoding="utf-8") as file:
             json.dump(content, file)
 
     def __is_file(self, filename):
@@ -95,8 +96,14 @@ class JSONProcessor:
             content = [objects.__dict__]
             self.__open_and_write(file_path, content)
 
-    def remove_from_favorites(self):
-        pass
+    def remove_from_favorites(self, index: int):
+        objects = self.__open_and_return_content('fav')
+        try:
+            del objects[index]
+        except IndexError:
+            print('Вакансии с таким номером нет в списке.')
+            return
+        self.__open_and_write(self.__fav_file_path, objects)
 
     def show_favorites(self):
         """

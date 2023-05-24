@@ -15,7 +15,8 @@ class HHParamsCreator(ABCParamsCreator):
 
         self.headers["area"] = place
 
-        self.headers['period'] = str(period)
+        if int(period) > 0:
+            self.headers['period'] = str(period)
 
         self.headers["per_page"] = "100"
         return self.headers

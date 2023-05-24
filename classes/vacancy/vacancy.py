@@ -1,7 +1,8 @@
 class Vacancy:
-    def __init__(self, name, salary, url, description, place):
+    def __init__(self, name, url, description, place, salary_from=None, salary_to=None):
         self.__name = name
-        self.__salary = salary if salary else 'ЗП не указана'
+        self.__salary_from = salary_from
+        self.__salary_to = salary_to
         self.__url = url
         self.__description = description
         self.__place = place
@@ -22,9 +23,14 @@ class Vacancy:
                 name = 'Не найдено'
 
             try:
-                salary = i['salary']
+                salary_from = i['salary']['from']
             except KeyError:
-                salary = 'Не найдено'
+                salary_from = None
+
+            try:
+                salary_to = i['salary']['from']
+            except KeyError:
+                salary_to = None
 
             try:
                 url = i['alternate_url']
@@ -40,7 +46,7 @@ class Vacancy:
                 place = i['area']['name']
             except KeyError:
                 place = 'Не найдено'
-            objects_list.append(cls(name, salary, url, description, place))
+            objects_list.append(cls(name, url, description, place, salary_from, salary_to))
 
         for i in sj_response['objects']:
             try:
@@ -49,9 +55,14 @@ class Vacancy:
                 name = 'Не найдено'
 
             try:
-                salary = i['payment_from']
+                salary_from = i['payment_from']
             except KeyError:
-                salary = 'Не найдено'
+                salary_from = 'Не найдено'
+
+            try:
+                salary_to = i['payment_to']
+            except KeyError:
+                salary_to = 'Не найдено'
 
             try:
                 url = i['client']['link']
@@ -67,13 +78,17 @@ class Vacancy:
                 place = i['client']['town']['title']
             except KeyError:
                 place = 'Не найдено'
-            objects_list.append(cls(name, salary, url, description, place))
+            objects_list.append(cls(name, url, description, place, salary_from, salary_to))
 
         return objects_list
 
     def __str__(self):
+        if self.__salary_to:
+            salary = f'ЗП от {self.__salary_from} до {self.__salary_to}.'
+        else:
+            salary = f'ЗП от {self.__salary_from}.'
         return f'{self.__name}\n' \
                f'{self.__place}\n' \
                f'{self.__description}\n' \
                f'{self.__url}\n' \
-               f'{self.__salary}'
+               f'{salary}'
