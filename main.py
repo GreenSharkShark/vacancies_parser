@@ -7,6 +7,7 @@ from classes.json_processor.json_processor import JSONProcessor
 from classes.vacancy.vacancy import Vacancy
 from functions.show_vacancies import show_vacancies
 from functions.show_favorites import show_favorites
+from functions.get_help import get_help
 
 
 def run_search():
@@ -45,6 +46,8 @@ def main_menu():
         elif answer.lower() == 'выход':
             print('Досвидули.')
             quit()
+        elif answer == 'получить помощь':
+            print(get_help())
         else:
             print(answer, 'не является внутренней командой.')
 
