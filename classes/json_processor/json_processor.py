@@ -11,9 +11,9 @@ class JSONProcessor:
     """
 
     def __init__(self):
-        self.__hh_file_path = '/home/purple_rabbit/coursepaper4/json_responses/hh_response_logs.json'
-        self.__sj_file_path = '/home/purple_rabbit/coursepaper4/json_responses/sj_response_logs.json'
-        self.__fav_file_path = '/home/purple_rabbit/coursepaper4/json_responses/favorite.json'
+        self.__hh_file_path = 'json_responses/hh_response_logs.json'
+        self.__sj_file_path = 'json_responses/sj_response_logs.json'
+        self.__fav_file_path = 'json_responses/favorite.json'
 
     def __return_filepath(self, filename):
         if filename == 'hh':
