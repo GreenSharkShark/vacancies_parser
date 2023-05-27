@@ -1,4 +1,4 @@
-from classes.json_processor.json_processor import JSONProcessor
+from classes.json_processor import JSONProcessor
 from functions.get_help import get_help
 
 
@@ -26,7 +26,11 @@ def show_favorites():
                 print(f'{index}: {value}')
 
         elif answer[0] == 'удалить':
-            _index = int(answer[1])
+            try:
+                _index = int(answer[1])
+            except ValueError:
+                print('Неправильны номер удаляемой вакансии.')
+                continue
             json_proc.remove_from_favorites(_index)
             print('Удалено.')
         elif answer[0] == 'выход':

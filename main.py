@@ -1,10 +1,9 @@
-from classes.area_finder.HHarea_finder import HHAreaFinder
-from classes.params_creator.SJ_params_creator import SJParamsCreator
-from classes.params_creator.HH_params_creator import HHParamsCreator
-from classes.requests_sender.super_job_request_sender import SuperJobRequestsSender
-from classes.requests_sender.hh_requests_sender import HunterRequestsSender
-from classes.json_processor.json_processor import JSONProcessor
-from classes.vacancy.vacancy import Vacancy
+from classes.HHarea_finder import HHAreaFinder
+from classes.params_creator import SJParamsCreator
+from classes.params_creator import HHParamsCreator
+from classes.request_sender import SuperJobRequestsSender, HunterRequestsSender
+from classes.json_processor import JSONProcessor
+from classes.vacancy import Vacancy
 from functions.show_vacancies import show_vacancies
 from functions.show_favorites import show_favorites
 from functions.get_help import get_help

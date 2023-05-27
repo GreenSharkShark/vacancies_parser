@@ -1,4 +1,4 @@
-from classes.json_processor.json_processor import JSONProcessor
+from classes.json_processor import JSONProcessor
 from functions.get_help import get_help
 
 
@@ -10,9 +10,7 @@ def show_vacancies(vacancies_list_objects):
         answer = input('Режим просмотра вакансий: ').lower().split()
         if answer[0] == 'сохранить':
             _index = int(answer[1])
-            json_saver.save_to_favorites(vacancies_list_objects[_index])
-            print('Сохранено.')
-
+            print(json_saver.save_to_favorites(vacancies_list_objects[_index]))
         elif answer[0] == 'сортировать':
             if answer[1] == 'зп':
                 if answer[2] == 'возрастание':

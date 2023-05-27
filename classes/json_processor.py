@@ -1,7 +1,7 @@
 import json
 import os
 import datetime
-from classes.vacancy.vacancy import Vacancy
+from classes.vacancy import Vacancy
 
 
 # noinspection PyUnboundLocalVariable
@@ -85,16 +85,21 @@ class JSONProcessor:
         :return: None
         """
         file_path = self.__fav_file_path
+        try:
+            data_to_load = objects.__dict__
+        except AttributeError:
+            return 'Этот объект сохранить нельзя.'
         if os.path.isfile(file_path):  # Проверяем существует ли файл
             content = self.__open_and_return_content('fav')
             if content:
-                content.append(objects.__dict__)
+                content.append(data_to_load)
             else:
-                content = [objects.__dict__]
+                content = [data_to_load]
             self.__open_and_write(file_path, content)
         else:
-            content = [objects.__dict__]
+            content = [data_to_load]
             self.__open_and_write(file_path, content)
+        return 'Сохранено.'
 
     def remove_from_favorites(self, index: int):
         objects = self.__open_and_return_content('fav')
