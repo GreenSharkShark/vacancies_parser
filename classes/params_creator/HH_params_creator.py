@@ -15,8 +15,11 @@ class HHParamsCreator(ABCParamsCreator):
 
         self.headers["area"] = place
 
-        if int(period) > 0:
-            self.headers['period'] = str(period)
+        try:
+            if int(period) > 0:
+                self.headers['period'] = str(period)
+        except ValueError:
+            pass  # Если ввели неверное значение ключ 'period' не передается и возвращаются пезультаты за все время
 
         self.headers["per_page"] = "100"
         return self.headers

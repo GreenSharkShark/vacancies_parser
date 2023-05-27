@@ -16,69 +16,75 @@ class Vacancy:
         :return:
         """
         objects_list = []
-        for i in hh_response['items']:
-            try:
-                name = i['name']
-            except KeyError:
-                name = 'Не найдено'
+        if not hh_response['items']:
+            objects_list.append('На hh.ru ничего не найдено.')
+        else:
+            for i in hh_response['items']:
+                try:
+                    name = i['name']
+                except KeyError:
+                    name = 'Не найдено'
 
-            try:
-                salary_from = i['salary']['from']
-            except (KeyError, TypeError):
-                salary_from = None
+                try:
+                    salary_from = i['salary']['from']
+                except (KeyError, TypeError):
+                    salary_from = None
 
-            try:
-                salary_to = i['salary']['from']
-            except (KeyError, TypeError):
-                salary_to = None
+                try:
+                    salary_to = i['salary']['from']
+                except (KeyError, TypeError):
+                    salary_to = None
 
-            try:
-                url = i['alternate_url']
-            except KeyError:
-                url = 'Не найдено'
+                try:
+                    url = i['alternate_url']
+                except KeyError:
+                    url = 'Не найдено'
 
-            try:
-                description = i['snippet']['requirement']
-            except KeyError:
-                description = 'Не найдено'
+                try:
+                    description = i['snippet']['requirement']
+                except KeyError:
+                    description = 'Не найдено'
 
-            try:
-                place = i['area']['name']
-            except KeyError:
-                place = 'Не найдено'
-            objects_list.append(cls(name, url, description, place, salary_from, salary_to))
+                try:
+                    place = i['area']['name']
+                except KeyError:
+                    place = 'Не найдено'
+                objects_list.append(cls(name, url, description, place, salary_from, salary_to))
 
-        for i in sj_response['objects']:
-            try:
-                name = i['profession']
-            except KeyError:
-                name = 'Не найдено'
+        if not sj_response['objects']:
+            objects_list.append('На superjob.ru ничего не найдено.')
+        else:
+            for i in sj_response['objects']:
+                try:
+                    name = i['profession']
+                except KeyError:
+                    name = 'Не найдено'
 
-            try:
-                salary_from = i['payment_from']
-            except KeyError:
-                salary_from = 'Не найдено'
+                try:
+                    salary_from = i['payment_from']
+                except KeyError:
+                    salary_from = 'Не найдено'
 
-            try:
-                salary_to = i['payment_to']
-            except KeyError:
-                salary_to = 'Не найдено'
+                try:
+                    salary_to = i['payment_to']
+                except KeyError:
+                    salary_to = 'Не найдено'
 
-            try:
-                url = i['client']['link']
-            except KeyError:
-                url = 'Не найдено'
+                try:
+                    url = i['client']['link']
+                except KeyError:
+                    url = 'Не найдено'
 
-            try:
-                description = i['candidat']
-            except KeyError:
-                description = 'Не найдено'
+                try:
+                    description = i['candidat']
+                except KeyError:
+                    description = 'Не найдено'
 
-            try:
-                place = i['client']['town']['title']
-            except KeyError:
-                place = 'Не найдено'
-            objects_list.append(cls(name, url, description, place, salary_from, salary_to))
+                try:
+                    place = i['client']['town']['title']
+                except KeyError:
+                    place = 'Не найдено'
+                objects_list.append(cls(name, url, description, place, salary_from, salary_to))
 
         return objects_list
 
