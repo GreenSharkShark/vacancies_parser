@@ -37,13 +37,13 @@ def run_search():
 
 def main_menu():
     while True:
-        answer = input('Главное меню: ')
-        if answer.lower() == 'поиск':
+        answer = input('Главное меню: ').lower()
+        if answer == 'поиск':
             vacancies = run_search()
             show_vacancies(vacancies)
-        elif answer.lower() == 'просмотреть сохраненные':
+        elif answer == 'просмотреть сохраненные':
             show_favorites()
-        elif answer.lower() == 'выход':
+        elif answer == 'выход':
             print('Досвидули.')
             quit()
         elif answer == 'получить помощь':
