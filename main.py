@@ -1,12 +1,12 @@
-from classes.area_finder.HHarea_finder import HHAreaFinder
-from classes.params_creator.SJ_params_creator import SJParamsCreator
-from classes.params_creator.HH_params_creator import HHParamsCreator
-from classes.requests_sender.super_job_request_sender import SuperJobRequestsSender
-from classes.requests_sender.hh_requests_sender import HunterRequestsSender
-from classes.json_processor.json_processor import JSONProcessor
-from classes.vacancy.vacancy import Vacancy
+from classes.HHarea_finder import HHAreaFinder
+from classes.params_creator import SJParamsCreator
+from classes.params_creator import HHParamsCreator
+from classes.request_sender import SuperJobRequestsSender, HunterRequestsSender
+from classes.json_processor import JSONProcessor
+from classes.vacancy import Vacancy
 from functions.show_vacancies import show_vacancies
 from functions.show_favorites import show_favorites
+from functions.get_help import get_help
 
 
 def run_search():
@@ -36,15 +36,17 @@ def run_search():
 
 def main_menu():
     while True:
-        answer = input('Главное меню: ')
-        if answer.lower() == 'поиск':
+        answer = input('Главное меню: ').lower()
+        if answer == 'поиск':
             vacancies = run_search()
             show_vacancies(vacancies)
-        elif answer.lower() == 'просмотреть сохраненные':
+        elif answer == 'просмотреть сохраненные':
             show_favorites()
-        elif answer.lower() == 'выход':
+        elif answer == 'выход':
             print('Досвидули.')
             quit()
+        elif answer == 'получить помощь':
+            print(get_help())
         else:
             print(answer, 'не является внутренней командой.')
 

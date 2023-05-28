@@ -1,7 +1,7 @@
 import json
 import os
 import datetime
-from classes.vacancy.vacancy import Vacancy
+from classes.vacancy import Vacancy
 
 
 # noinspection PyUnboundLocalVariable
@@ -11,9 +11,9 @@ class JSONProcessor:
     """
 
     def __init__(self):
-        self.__hh_file_path = '/home/purple_rabbit/coursepaper4/json_responses/hh_response_logs.json'
-        self.__sj_file_path = '/home/purple_rabbit/coursepaper4/json_responses/sj_response_logs.json'
-        self.__fav_file_path = '/home/purple_rabbit/coursepaper4/json_responses/favorite.json'
+        self.__hh_file_path = 'json_responses/hh_response_logs.json'
+        self.__sj_file_path = 'json_responses/sj_response_logs.json'
+        self.__fav_file_path = 'json_responses/favorite.json'
 
     def __return_filepath(self, filename):
         if filename == 'hh':
@@ -85,16 +85,21 @@ class JSONProcessor:
         :return: None
         """
         file_path = self.__fav_file_path
+        try:
+            data_to_load = objects.__dict__
+        except AttributeError:
+            return 'Этот объект сохранить нельзя.'
         if os.path.isfile(file_path):  # Проверяем существует ли файл
             content = self.__open_and_return_content('fav')
             if content:
-                content.append(objects.__dict__)
+                content.append(data_to_load)
             else:
-                content = [objects.__dict__]
+                content = [data_to_load]
             self.__open_and_write(file_path, content)
         else:
-            content = [objects.__dict__]
+            content = [data_to_load]
             self.__open_and_write(file_path, content)
+        return 'Сохранено.'
 
     def remove_from_favorites(self, index: int):
         objects = self.__open_and_return_content('fav')
@@ -117,9 +122,10 @@ class JSONProcessor:
         objects_list = []
         for i in objects:
             name = i['_Vacancy__name']
-            salary = i['_Vacancy__salary']
+            salary_from = i['_salary_from']
+            salary_to = i['_salary_to']
             url = i['_Vacancy__url']
             description = i['_Vacancy__description']
             place = i['_Vacancy__place']
-            objects_list.append(Vacancy(name, salary, url, description, place))
+            objects_list.append(Vacancy(name, url, description, place, salary_from, salary_to))
         return objects_list
